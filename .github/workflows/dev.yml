@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.FTP_HOST_DEV }}
+        username: ${{ secrets.FTP_USER_DEV }}
+        password: ${{ secrets.FTP_PASSWORD_DEV }}
